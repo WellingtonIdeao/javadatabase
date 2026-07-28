@@ -24,6 +24,8 @@ public class App {
 			}
 		} catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcConnection.closePool();
         }
     }
 }
