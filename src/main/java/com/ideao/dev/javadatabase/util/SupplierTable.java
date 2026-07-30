@@ -13,7 +13,7 @@ public class SupplierTable {
 
     public  void createTable() throws SQLException {
         String sql =
-                "CREATE TABLE IF NOT EXISTS Suppliers (" +
+                "CREATE TABLE IF NOT EXISTS suppliers (" +
                 "id INTEGER NOT NULL, " +
                 "name VARCHAR(40) NOT NULL, " +
                 "street VARCHAR(40) NOT NULL, " +
@@ -23,6 +23,17 @@ public class SupplierTable {
                 "PRIMARY KEY (id))";
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate(sql);
+        }
+    }
+
+    public void populateTable() throws SQLException {
+        try (Statement stmt = connection.createStatement()) {
+           stmt.executeUpdate("INSERT INTO suppliers " +
+                   "VALUES(49, 'Superior Coffee', '1 Party Place', 'Mendocino', 'CA', '95460')");
+            stmt.executeUpdate("INSERT INTO suppliers " +
+                    "VALUES(101, 'Acne, Inc.', '99 Market Street', 'GroundVille', 'CA', '95199')");
+            stmt.executeUpdate("INSERT INTO suppliers " +
+                    "VALUES(150, 'The High Ground', '100 Coffee Lane', 'Meadows', 'CA', '93966')");
         }
     }
 }

@@ -25,4 +25,19 @@ public class CoffeeTable {
             stmt.executeUpdate(sql);
         }
     }
+
+    public void populateTable() throws SQLException {
+        try (Statement stmt = connection.createStatement()) {
+           stmt.executeUpdate("INSERT INTO coffees " +
+                   "VALUES('Colombian', 101, 7.99, 0, 0)");
+            stmt.executeUpdate("INSERT INTO coffees " +
+                    "VALUES('French_Roast', 49, 8.99, 0, 0)");
+            stmt.executeUpdate("INSERT INTO coffees " +
+                    "VALUES('Espresso', 150, 9.99, 0, 0)");
+            stmt.executeUpdate("INSERT INTO coffees " +
+                    "VALUES('Colombian_Decaf', 101, 8.99, 0, 0)");
+            stmt.executeUpdate("INSERT INTO coffees " +
+                    "VALUES('French_Roast_Decaf', 49, 9.99, 0, 0)");
+        }
+    }
 }
