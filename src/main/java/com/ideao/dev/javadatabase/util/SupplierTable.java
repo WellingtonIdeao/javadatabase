@@ -1,6 +1,7 @@
 package com.ideao.dev.javadatabase.util;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -34,6 +35,22 @@ public class SupplierTable {
                     "VALUES(101, 'Acne, Inc.', '99 Market Street', 'GroundVille', 'CA', '95199')");
             stmt.executeUpdate("INSERT INTO suppliers " +
                     "VALUES(150, 'The High Ground', '100 Coffee Lane', 'Meadows', 'CA', '93966')");
+        }
+    }
+
+    public void viewTable() throws SQLException {
+        String query = "SELECT name, street, city, state, zip FROM suppliers";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String street = rs.getString("street");
+                String city = rs.getString("city");
+                String state = rs.getString("state");
+                String zip = rs.getString("zip");
+
+                System.out.println(name + ", " + street + ", " + city + ", " + state + ", " + zip);
+            }
         }
     }
 }
