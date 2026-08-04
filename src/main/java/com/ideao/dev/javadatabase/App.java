@@ -24,6 +24,8 @@ public class App {
 
 			st.viewTable();
 			ct.viewTable();
+//			ct.batchUpdate();
+
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

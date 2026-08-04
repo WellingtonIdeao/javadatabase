@@ -56,4 +56,23 @@ public class CoffeeTable {
             }
         }
     }
+
+    public void batchUpdate() throws SQLException {
+        connection.setAutoCommit(false);
+        try (Statement stmt = connection.createStatement()) {
+            stmt.addBatch("INSERT INTO coffees " +
+                    "VALUES('Amaretto', 49, 9.99, 0, 0)");
+            stmt.addBatch("INSERT INTO coffees " +
+                    "VALUES('Hazelnut', 49, 9.99, 0, 0)");
+            stmt.addBatch("INSERT INTO coffees " +
+                    "VALUES('Amaretto_decaf', 49, 10.99, 0, 0)");
+            stmt.addBatch("INSERT INTO coffees " +
+                    "VALUES('Hazelnut_decaf', 49, 10.99, 0, 0)");
+
+            int[] updateCounts = stmt.executeBatch();
+            connection.commit();
+        } finally {
+            connection.setAutoCommit(true);
+        }
+    }
 }
