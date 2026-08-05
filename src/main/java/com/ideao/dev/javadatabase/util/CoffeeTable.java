@@ -1,9 +1,6 @@
 package com.ideao.dev.javadatabase.util;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CoffeeTable {
     private final Connection connection;
@@ -22,30 +19,58 @@ public class CoffeeTable {
                 "total INTEGER NOT NULL, " +
                 "PRIMARY KEY (name), " +
                 "FOREIGN KEY (sup_id) REFERENCES supplier (id))";
-        try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(sql);
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.executeUpdate();
         }
     }
 
     public void populateTable() throws SQLException {
-        try (Statement stmt = connection.createStatement()) {
-           stmt.executeUpdate("INSERT INTO coffees " +
-                   "VALUES('Colombian', 101, 7.99, 0, 0)");
-            stmt.executeUpdate("INSERT INTO coffees " +
-                    "VALUES('French_Roast', 49, 8.99, 0, 0)");
-            stmt.executeUpdate("INSERT INTO coffees " +
-                    "VALUES('Espresso', 150, 9.99, 0, 0)");
-            stmt.executeUpdate("INSERT INTO coffees " +
-                    "VALUES('Colombian_Decaf', 101, 8.99, 0, 0)");
-            stmt.executeUpdate("INSERT INTO coffees " +
-                    "VALUES('French_Roast_Decaf', 49, 9.99, 0, 0)");
+        String sql = "INSERT INTO coffees VALUES(?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+           pstmt.setString(1, "Colombian");
+           pstmt.setInt(2, 101);
+           pstmt.setDouble(3, 7.99);
+           pstmt.setInt(4, 0);
+           pstmt.setInt(5, 0);
+           pstmt.executeUpdate();
+
+           pstmt.setString(1, "French_Roast");
+           pstmt.setInt(2, 49);
+           pstmt.setDouble(3, 8.99);
+           pstmt.setInt(4, 0);
+           pstmt.setInt(5, 0);
+           pstmt.executeUpdate();
+
+           pstmt.setString(1, "Espresso");
+           pstmt.setInt(2, 150);
+           pstmt.setDouble(3, 9.99);
+           pstmt.setInt(4, 0);
+           pstmt.setInt(5, 0);
+           pstmt.executeUpdate();
+
+           pstmt.setString(1, "Colombian_Decaf");
+           pstmt.setInt(2, 101);
+           pstmt.setDouble(3, 8.99);
+           pstmt.setInt(4, 0);
+           pstmt.setInt(5, 0);
+           pstmt.executeUpdate();
+
+           pstmt.setString(1, "French_Roast_Decaf");
+           pstmt.setInt(2, 49);
+           pstmt.setDouble(3, 9.99);
+           pstmt.setInt(4, 0);
+           pstmt.setInt(5, 0);
+           pstmt.executeUpdate();
         }
     }
 
     public void viewTable() throws SQLException {
-        String query = "SELECT name, price, sales, total FROM coffees";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        String sql = "SELECT name, price, sales, total FROM coffees";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 String name = rs.getString("name");
                 double price = rs.getDouble("price");
@@ -58,18 +83,39 @@ public class CoffeeTable {
     }
 
     public void batchUpdate() throws SQLException {
+        String sql = "INSERT INTO coffees VALUES(?, ?, ?, ?, ?)";
         connection.setAutoCommit(false);
-        try (Statement stmt = connection.createStatement()) {
-            stmt.addBatch("INSERT INTO coffees " +
-                    "VALUES('Amaretto', 49, 9.99, 0, 0)");
-            stmt.addBatch("INSERT INTO coffees " +
-                    "VALUES('Hazelnut', 49, 9.99, 0, 0)");
-            stmt.addBatch("INSERT INTO coffees " +
-                    "VALUES('Amaretto_decaf', 49, 10.99, 0, 0)");
-            stmt.addBatch("INSERT INTO coffees " +
-                    "VALUES('Hazelnut_decaf', 49, 10.99, 0, 0)");
 
-            int[] updateCounts = stmt.executeBatch();
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, "Amaretto");
+            pstmt.setInt(2, 49);
+            pstmt.setDouble(3, 9.99);
+            pstmt.setInt(4, 0);
+            pstmt.setInt(5, 0);
+            pstmt.addBatch();
+
+            pstmt.setString(1, "Hazelnut");
+            pstmt.setInt(2, 49);
+            pstmt.setDouble(3, 9.99);
+            pstmt.setInt(4, 0);
+            pstmt.setInt(5, 0);
+            pstmt.addBatch();
+
+            pstmt.setString(1, "Amaretto_decaf");
+            pstmt.setInt(2, 49);
+            pstmt.setDouble(3, 10.99);
+            pstmt.setInt(4, 0);
+            pstmt.setInt(5, 0);
+            pstmt.addBatch();
+
+            pstmt.setString(1, "Hazelnut_decaf");
+            pstmt.setInt(2, 49);
+            pstmt.setDouble(3, 10.99);
+            pstmt.setInt(4, 0);
+            pstmt.setInt(5, 0);
+            pstmt.addBatch();
+
+            int[] updateCounts = pstmt.executeBatch();
             connection.commit();
         } finally {
             connection.setAutoCommit(true);

@@ -1,9 +1,6 @@
 package com.ideao.dev.javadatabase.util;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SupplierTable {
     private final Connection connection;
@@ -22,26 +19,47 @@ public class SupplierTable {
                 "state CHAR(2) NOT NULL, " +
                 "zip CHAR(5), " +
                 "PRIMARY KEY (id))";
-        try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(sql);
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.executeUpdate();
         }
     }
 
     public void populateTable() throws SQLException {
-        try (Statement stmt = connection.createStatement()) {
-           stmt.executeUpdate("INSERT INTO suppliers " +
-                   "VALUES(49, 'Superior Coffee', '1 Party Place', 'Mendocino', 'CA', '95460')");
-            stmt.executeUpdate("INSERT INTO suppliers " +
-                    "VALUES(101, 'Acne, Inc.', '99 Market Street', 'GroundVille', 'CA', '95199')");
-            stmt.executeUpdate("INSERT INTO suppliers " +
-                    "VALUES(150, 'The High Ground', '100 Coffee Lane', 'Meadows', 'CA', '93966')");
+        String sql = "INSERT INTO suppliers VALUES(?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, 49);
+            pstmt.setString(2, "Superior Coffee");
+            pstmt.setString(3, "1 Party Place");
+            pstmt.setString(4, "Mendocino");
+            pstmt.setString(5, "CA");
+            pstmt.setString(6, "95460");
+            pstmt.executeUpdate();
+
+            pstmt.setInt(1, 101);
+            pstmt.setString(2, "Acne, Inc.");
+            pstmt.setString(3, "99 Market Street");
+            pstmt.setString(4, "GroundVille");
+            pstmt.setString(5, "CA");
+            pstmt.setString(6, "95199");
+            pstmt.executeUpdate();
+
+            pstmt.setInt(1, 150);
+            pstmt.setString(2, "The High Ground");
+            pstmt.setString(3, "100 Coffee Lane");
+            pstmt.setString(4, "Meadows");
+            pstmt.setString(5, "CA");
+            pstmt.setString(6, "93966");
+            pstmt.executeUpdate();
         }
     }
 
     public void viewTable() throws SQLException {
-        String query = "SELECT name, street, city, state, zip FROM suppliers";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        String sql = "SELECT name, street, city, state, zip FROM suppliers";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 String name = rs.getString("name");
                 String street = rs.getString("street");
