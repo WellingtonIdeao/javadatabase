@@ -9,24 +9,8 @@ public class CoffeeTable {
         this.connection = connection;
     }
 
-    public void createTable() throws SQLException {
-        String sql =
-                "CREATE TABLE IF NOT EXISTS coffees (" +
-                "name VARCHAR(32) NOT NULL, " +
-                "sup_id INT NOT NULL, " +
-                "price NUMERIC(10,2) NOT NULL, " +
-                "sales INTEGER NOT NULL, " +
-                "total INTEGER NOT NULL, " +
-                "PRIMARY KEY (name), " +
-                "FOREIGN KEY (sup_id) REFERENCES supplier (id))";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        }
-    }
-
     public void populateTable() throws SQLException {
-        String sql = "INSERT INTO coffees VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO coffee VALUES(?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
            pstmt.setString(1, "Colombian");
@@ -67,7 +51,7 @@ public class CoffeeTable {
     }
 
     public void viewTable() throws SQLException {
-        String sql = "SELECT name, price, sales, total FROM coffees";
+        String sql = "SELECT name, price, sales, total FROM coffee";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
@@ -83,7 +67,7 @@ public class CoffeeTable {
     }
 
     public void batchUpdate() throws SQLException {
-        String sql = "INSERT INTO coffees VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO coffee VALUES(?, ?, ?, ?, ?)";
         connection.setAutoCommit(false);
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

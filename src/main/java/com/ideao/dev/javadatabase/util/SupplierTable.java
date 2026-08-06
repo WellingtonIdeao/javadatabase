@@ -9,24 +9,8 @@ public class SupplierTable {
        this.connection = connection;
     }
 
-    public  void createTable() throws SQLException {
-        String sql =
-                "CREATE TABLE IF NOT EXISTS suppliers (" +
-                "id INTEGER NOT NULL, " +
-                "name VARCHAR(40) NOT NULL, " +
-                "street VARCHAR(40) NOT NULL, " +
-                "city VARCHAR(20) NOT NULL, " +
-                "state CHAR(2) NOT NULL, " +
-                "zip CHAR(5), " +
-                "PRIMARY KEY (id))";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        }
-    }
-
     public void populateTable() throws SQLException {
-        String sql = "INSERT INTO suppliers VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO supplier VALUES(?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, 49);
@@ -56,7 +40,7 @@ public class SupplierTable {
     }
 
     public void viewTable() throws SQLException {
-        String sql = "SELECT name, street, city, state, zip FROM suppliers";
+        String sql = "SELECT name, street, city, state, zip FROM supplier";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
