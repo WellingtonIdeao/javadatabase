@@ -17,8 +17,6 @@ public class App {
 			SupplierTable st = new SupplierTable(con);
 			CoffeeTable ct = new CoffeeTable(con);
 
-
-
 //			st.populateTable();
 //			ct.populateTable();
 
