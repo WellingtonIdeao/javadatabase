@@ -1,7 +1,7 @@
 package com.ideao.dev.javadatabase.model.dao;
 
 import com.ideao.dev.javadatabase.model.entity.Supplier;
-import com.ideao.dev.javadatabase.util.JdbcConnection;
+import com.ideao.dev.javadatabase.config.DatabaseConfig;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class SupplierDaoJdbc implements SupplierDAO {
         String sql = "SELECT id, name, street, city, state, zip FROM supplier";
         List<Supplier> suppliers = new ArrayList<>();
 
-        try (Connection con = JdbcConnection.getConnection();
+        try (Connection con = DatabaseConfig.getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
@@ -39,7 +39,7 @@ public class SupplierDaoJdbc implements SupplierDAO {
     public void create(Supplier supplier) {
         String sql = "INSERT INTO supplier (name, street, city, state, zip) VALUES(?, ?, ?, ?, ?)";
 
-        try (Connection connection = JdbcConnection.getConnection();
+        try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getName());
             pstmt.setString(2, supplier.getStreet());

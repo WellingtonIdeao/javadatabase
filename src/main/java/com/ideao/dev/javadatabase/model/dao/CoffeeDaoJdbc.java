@@ -1,7 +1,7 @@
 package com.ideao.dev.javadatabase.model.dao;
 
+import com.ideao.dev.javadatabase.config.DatabaseConfig;
 import com.ideao.dev.javadatabase.model.entity.Coffee;
-import com.ideao.dev.javadatabase.util.JdbcConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ public class CoffeeDaoJdbc implements CoffeeDao {
     public List<Coffee> viewList() {
         String sql = "SELECT name, sup_id, price, sales, total FROM coffee";
         List<Coffee> coffees = new ArrayList<>();
-        try (PreparedStatement pstmt = JdbcConnection.getConnection().prepareStatement(sql);
+        try (PreparedStatement pstmt = DatabaseConfig.getConnection().prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 String name = rs.getString("name");
