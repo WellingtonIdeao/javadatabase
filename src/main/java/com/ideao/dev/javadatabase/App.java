@@ -1,33 +1,23 @@
 package com.ideao.dev.javadatabase;
 
-import com.ideao.dev.javadatabase.db.DBMigration;
-import com.ideao.dev.javadatabase.util.CoffeeTable;
+import com.ideao.dev.javadatabase.controller.CoffeeController;
+import com.ideao.dev.javadatabase.controller.SupplierController;
+import com.ideao.dev.javadatabase.migrations.DBMigration;
+import com.ideao.dev.javadatabase.model.entity.Supplier;
 import com.ideao.dev.javadatabase.util.JdbcConnection;
-import com.ideao.dev.javadatabase.util.SupplierTable;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class App {
 	public static void main(String[] args) {
-		try (Connection con = JdbcConnection.getConnection()) {
-			System.out.println("Hello World, Java database project");
-			DBMigration.apply();
+		DBMigration.apply();
+		SupplierController supController = new SupplierController();
+        CoffeeController coffeeController = new CoffeeController();
 
-			SupplierTable st = new SupplierTable(con);
-			CoffeeTable ct = new CoffeeTable(con);
+//      supController.viewList();
+//      supController.add(new Supplier("Guga Ltda.","projetada", "joão pessoa", "PB", "58000" ));
+        supController.viewList();
 
-//			st.populateTable();
-//			ct.populateTable();
-
-			st.viewTable();
-			ct.viewTable();
-//			ct.batchUpdate();
-
-		} catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            JdbcConnection.closePool();
-        }
+        coffeeController.viewList();
+        JdbcConnection.closePool();
     }
 }

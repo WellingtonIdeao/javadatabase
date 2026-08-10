@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.db;
+package com.ideao.dev.javadatabase.migrations;
 
 import org.flywaydb.core.Flyway;
 
