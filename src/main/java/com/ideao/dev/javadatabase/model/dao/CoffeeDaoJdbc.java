@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoffeeDaoJdbc implements CoffeeDao {
+public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
 
     @Override
     public List<Coffee> viewList() {
@@ -42,12 +42,12 @@ public class CoffeeDaoJdbc implements CoffeeDao {
     }
 
     @Override
-    public void read(long id) {
+    public void read(String id) {
 
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(String id) {
 
     }
 }

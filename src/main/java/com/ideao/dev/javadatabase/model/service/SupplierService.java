@@ -1,23 +1,23 @@
 package com.ideao.dev.javadatabase.model.service;
 
+import com.ideao.dev.javadatabase.model.dao.GenericRepository;
 import com.ideao.dev.javadatabase.model.entity.Supplier;
 import com.ideao.dev.javadatabase.model.dao.DAOFactory;
-import com.ideao.dev.javadatabase.model.dao.SupplierDAO;
 
 import java.util.List;
 
 public class SupplierService {
-    private final SupplierDAO supplierDAO;
+    private final GenericRepository<Supplier, Long> repository;
 
     public SupplierService() {
-        supplierDAO = DAOFactory.createSupplierDAO();
+        this.repository = DAOFactory.createSupplierDAO();
     }
 
     public List<Supplier> viewList() {
-        return supplierDAO.viewList();
+        return repository.viewList();
     }
 
     public void add(Supplier supplier) {
-        supplierDAO.create(supplier);
+        repository.create(supplier);
     }
 }

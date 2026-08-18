@@ -1,12 +1,15 @@
 package com.ideao.dev.javadatabase.model.dao;
 
+import com.ideao.dev.javadatabase.model.entity.Coffee;
+import com.ideao.dev.javadatabase.model.entity.Supplier;
+
 public class DAOFactory {
 
-    public static SupplierDAO createSupplierDAO() {
+    public static GenericRepository<Supplier, Long> createSupplierDAO() {
         return new SupplierDaoJdbc();
     }
 
-    public static CoffeeDao createCoffeeDAO() {
+    public static GenericRepository<Coffee, String> createCoffeeDAO() {
         return new CoffeeDaoJdbc();
     }
 }

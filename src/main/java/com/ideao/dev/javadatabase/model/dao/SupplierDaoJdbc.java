@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDaoJdbc implements SupplierDAO {
+public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     public List<Supplier> viewList() {
         String sql = "SELECT id, name, street, city, state, zip FROM supplier";
@@ -58,12 +58,12 @@ public class SupplierDaoJdbc implements SupplierDAO {
     }
 
     @Override
-    public void read(long id) {
+    public void read(Long id) {
 
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
     }
 }
