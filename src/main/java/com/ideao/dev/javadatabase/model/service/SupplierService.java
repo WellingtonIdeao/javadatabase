@@ -20,4 +20,14 @@ public class SupplierService {
     public void add(Supplier supplier) {
         repository.create(supplier);
     }
+
+    public Supplier read(Long id) {
+        return repository.read(id);
+    }
+
+    public void update(Supplier supplier) {
+       if (supplier.getId() != 0) {
+            repository.update(supplier);
+       }
+    }
 }

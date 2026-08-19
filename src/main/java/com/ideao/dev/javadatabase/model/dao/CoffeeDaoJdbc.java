@@ -42,8 +42,8 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
     }
 
     @Override
-    public void read(String id) {
-
+    public Coffee read(String id) {
+        return null;
     }
 
     @Override

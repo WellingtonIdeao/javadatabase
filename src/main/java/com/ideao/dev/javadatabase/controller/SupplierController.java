@@ -8,19 +8,34 @@ import java.util.List;
 
 public class SupplierController {
     private final SupplierService supplierService;
+    private final SupplierView supplierView;
 
     public SupplierController() {
        supplierService = new SupplierService();
+       supplierView = new SupplierView();
     }
 
     public void viewList() {
         List<Supplier> suppliers = supplierService.viewList();
 
-        SupplierView view = new SupplierView();
-        view.viewJson(suppliers);
+        supplierView.viewJson(suppliers);
     }
 
     public void add(Supplier supplier) {
         supplierService.add(supplier);
     }
+
+    public void view() {
+        Long id = 2L;
+        Supplier supplier = supplierService.read(id);
+        supplierView.viewDetail(supplier);
+    }
+
+    public void update() {
+        Long id = 2L;
+        Supplier supplier = supplierService.read(id);
+        supplier.setName("Modificado Ltda.");
+        supplierService.update(supplier);
+    }
+
 }

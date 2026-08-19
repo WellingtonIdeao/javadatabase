@@ -3,6 +3,7 @@ package com.ideao.dev.javadatabase.model.dao;
 import com.ideao.dev.javadatabase.model.entity.Supplier;
 import com.ideao.dev.javadatabase.config.DatabaseConfig;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +55,47 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     @Override
     public void update(Supplier supplier) {
+        String sql = "UPDATE supplier SET name = ?, street = ?, city = ?, state = ?, zip = ? WHERE id = ?";
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, supplier.getName());
+            pstmt.setString(2, supplier.getStreet());
+            pstmt.setString(3, supplier.getCity());
+            pstmt.setString(4, supplier.getState());
+            pstmt.setString(5, supplier.getZip());
+            pstmt.setLong(6, supplier.getId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
-    public void read(Long id) {
+    public Supplier read(Long id) {
+        String sql = "SELECT * FROM supplier WHERE id = ?";
+        Supplier supplier = new Supplier();
 
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql) ) {
+            pstmt.setLong(1, id);
+
+           try (ResultSet rs = pstmt.executeQuery()) {
+               while (rs.next()) {
+                   supplier.setId(rs.getLong(1));
+                   supplier.setName(rs.getString(2));
+                   supplier.setStreet(rs.getString(3));
+                   supplier.setCity(rs.getString(4));
+                   supplier.setState(rs.getString(5));
+                   supplier.setZip(rs.getString(6));
+               }
+           }
+           return supplier;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -22,4 +22,8 @@ public class SupplierView {
             System.out.println("}");
         }
     }
+
+    public void viewDetail(Supplier supplier) {
+        System.out.println(supplier);
+    }
 }
