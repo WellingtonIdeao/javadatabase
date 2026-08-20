@@ -30,4 +30,8 @@ public class SupplierService {
             repository.update(supplier);
        }
     }
+
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }

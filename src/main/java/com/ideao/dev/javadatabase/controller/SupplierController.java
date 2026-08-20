@@ -38,4 +38,9 @@ public class SupplierController {
         supplierService.update(supplier);
     }
 
+    public void delete() {
+        Long id = 4L;
+        supplierService.delete(id);
+    }
+
 }

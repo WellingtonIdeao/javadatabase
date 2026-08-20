@@ -11,7 +11,7 @@ import java.util.List;
 public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     public List<Supplier> viewList() {
-        String sql = "SELECT id, name, street, city, state, zip FROM supplier";
+        String sql = "SELECT id, name, street, city, state, zip FROM supplier WHERE is_active = TRUE";
         List<Supplier> suppliers = new ArrayList<>();
 
         try (Connection con = DatabaseConfig.getConnection();
@@ -38,7 +38,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     @Override
     public void create(Supplier supplier) {
-        String sql = "INSERT INTO supplier (name, street, city, state, zip) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO supplier (name, street, city, state, zip) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -47,6 +47,8 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
             pstmt.setString(3, supplier.getCity());
             pstmt.setString(4, supplier.getState());
             pstmt.setString(5, supplier.getZip());
+            pstmt.setBoolean(6, true);
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,7 +57,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     @Override
     public void update(Supplier supplier) {
-        String sql = "UPDATE supplier SET name = ?, street = ?, city = ?, state = ?, zip = ? WHERE id = ?";
+        String sql = "UPDATE supplier SET name = ?, street = ?, city = ?, state = ?, zip = ? WHERE id = ? AND is_active";
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getName());
@@ -75,7 +77,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     @Override
     public Supplier read(Long id) {
-        String sql = "SELECT * FROM supplier WHERE id = ?";
+        String sql = "SELECT * FROM supplier WHERE id = ? AND is_active";
         Supplier supplier = new Supplier();
 
         try (Connection connection = DatabaseConfig.getConnection();
@@ -90,6 +92,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
                    supplier.setCity(rs.getString(4));
                    supplier.setState(rs.getString(5));
                    supplier.setZip(rs.getString(6));
+                   supplier.setActive(rs.getBoolean(7));
                }
            }
            return supplier;
@@ -100,6 +103,16 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
     @Override
     public void delete(Long id) {
+        String sql = "UPDATE supplier SET is_active = ? WHERE id = ?";
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setBoolean(1, false);
+            pstmt.setLong(2, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

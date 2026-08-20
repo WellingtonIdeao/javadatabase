@@ -7,6 +7,7 @@ public class Supplier {
     private String city;
     private String state;
     private String zip;
+    private boolean isActive;
 
     public Supplier() {}
 
@@ -63,6 +64,14 @@ public class Supplier {
 
     public String getZip() {
         return zip;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override

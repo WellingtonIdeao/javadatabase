@@ -12,11 +12,12 @@ public class App {
 
 //      supController.viewList();
 //      supController.add(new Supplier("Teste Ltda.","projetada", "joão pessoa", "PB", "58000" ));
-//        supController.viewList();
+        supController.delete();
+        supController.viewList();
 
 //        coffeeController.viewList();
-        supController.view();
-        supController.update();
+//        supController.view();
+//        supController.update();
         supController.view();
     }
 }
