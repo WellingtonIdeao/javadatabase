@@ -26,12 +26,16 @@ public class SupplierService {
     }
 
     public void update(Supplier supplier) {
-       if (supplier.getId() != 0) {
+       if (repository.existsById(supplier.getId())) {
             repository.update(supplier);
+       } else {
+           System.out.println("Supplier not found.");
        }
     }
 
     public void delete(Long id) {
-        repository.delete(id);
+        if (repository.existsById(id)) {
+            repository.delete(id);
+        }
     }
 }

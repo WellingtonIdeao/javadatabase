@@ -17,4 +17,12 @@ public class CoffeeView {
             System.out.println("}");
         }
     }
+
+    public void viewDetails(Coffee coffee) {
+        if (coffee != null) {
+            System.out.println(coffee);
+        } else {
+            System.out.println("Coffee not found");
+        }
+    }
 }

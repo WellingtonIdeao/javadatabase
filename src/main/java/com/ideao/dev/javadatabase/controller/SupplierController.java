@@ -26,20 +26,24 @@ public class SupplierController {
     }
 
     public void view() {
-        Long id = 2L;
+        Long id = 5L;
         Supplier supplier = supplierService.read(id);
         supplierView.viewDetail(supplier);
     }
 
     public void update() {
-        Long id = 2L;
+        Long id = 5L;
         Supplier supplier = supplierService.read(id);
-        supplier.setName("Modificado Ltda.");
-        supplierService.update(supplier);
+        if (supplier != null) {
+            supplier.setName("Modificado Ltda.");
+            supplierService.update(supplier);
+        } else {
+            System.out.println("Supplier invalid.");
+        }
     }
 
     public void delete() {
-        Long id = 4L;
+        Long id = 5L;
         supplierService.delete(id);
     }
 

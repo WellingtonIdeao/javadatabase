@@ -1,7 +1,5 @@
 package com.ideao.dev.javadatabase.model.dao;
 
-import com.ideao.dev.javadatabase.model.entity.Supplier;
-
 import java.util.List;
 
 public interface GenericRepository<T, ID> {
@@ -10,4 +8,5 @@ public interface GenericRepository<T, ID> {
     void update(T t);
     T read(ID id);
     void delete(ID id);
+    Boolean existsById(ID id);
 }

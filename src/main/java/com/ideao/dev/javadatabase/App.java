@@ -10,14 +10,16 @@ public class App {
 		SupplierController supController = new SupplierController();
         CoffeeController coffeeController = new CoffeeController();
 
-//      supController.viewList();
-//      supController.add(new Supplier("Teste Ltda.","projetada", "joão pessoa", "PB", "58000" ));
-        supController.delete();
-        supController.viewList();
-
-//        coffeeController.viewList();
+//        supController.add(new Supplier("Teste Ltda.","projetada", "joão pessoa", "PB", "58000" ));
 //        supController.view();
+        supController.viewList();
 //        supController.update();
-        supController.view();
+//        supController.delete();
+
+//        coffeeController.add();
+        coffeeController.viewList();
+//        coffeeController.view();
+//        coffeeController.update();
+//        coffeeController.delete();
     }
 }

@@ -7,6 +7,8 @@ public class Coffee {
    private int sales;
    private int total;
 
+    public Coffee() {}
+
     public Coffee(String name, long supId, double price, int sales, int total) {
         this.name = name;
         this.supId = supId;
@@ -23,15 +25,32 @@ public class Coffee {
         return supId;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public double getPrice() {
         return price;
+    }
+
+    public void setSales(int sales) {
+        this.sales = sales;
     }
 
     public int getSales() {
         return sales;
     }
 
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     public int getTotal() {
         return total;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + name + ", " + supId + ", " + price + ", " + sales + ", " + total + ")";
     }
 }

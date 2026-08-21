@@ -26,10 +26,10 @@ public class SupplierView {
     }
 
     public void viewDetail(Supplier supplier) {
-        if (supplier.getId() == 0) {
-            System.out.println("Supplier não encontrado! Tente com outro id.");
-        } else {
+        if (supplier != null) {
             System.out.println(supplier);
+        } else {
+            System.out.println("Supplier não encontrado! Tente com outro id.");
         }
     }
 }
