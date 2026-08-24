@@ -1,10 +1,11 @@
 package com.ideao.dev.javadatabase.supplier;
 
 import com.ideao.dev.javadatabase.common.repository.GenericRepository;
-import com.ideao.dev.javadatabase.supplier.dto.AddSupplierDTO;
-import com.ideao.dev.javadatabase.supplier.dto.SupplierDTO;
-import com.ideao.dev.javadatabase.supplier.dto.UpdateSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dtos.AddSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dtos.SupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
 import com.ideao.dev.javadatabase.common.database.DAOFactory;
+import com.ideao.dev.javadatabase.supplier.mappers.SupplierMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class SupplierService {
         List<Supplier> suppliers = repository.viewList();
         List<SupplierDTO> supplierDTOs = new ArrayList<>();
         for (Supplier s: suppliers) {
-            supplierDTOs.add(new SupplierDTO(s));
+            supplierDTOs.add(SupplierMapper.toDTO(s));
         }
         return supplierDTOs;
     }
@@ -39,7 +40,7 @@ public class SupplierService {
         SupplierDTO supplierDTO = null;
 
         if(supplier != null) {
-            supplierDTO = new SupplierDTO(supplier);
+            supplierDTO = SupplierMapper.toDTO(supplier);
         }
         return supplierDTO;
     }

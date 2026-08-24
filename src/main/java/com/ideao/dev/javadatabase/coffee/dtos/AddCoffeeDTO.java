@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.coffee.dto;
+package com.ideao.dev.javadatabase.coffee.dtos;
 
 public class AddCoffeeDTO {
     private String name;

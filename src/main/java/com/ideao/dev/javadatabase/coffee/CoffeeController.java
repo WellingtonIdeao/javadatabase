@@ -1,8 +1,8 @@
 package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.coffee.dto.AddCoffeeDTO;
-import com.ideao.dev.javadatabase.coffee.dto.CoffeeDTO;
-import com.ideao.dev.javadatabase.coffee.dto.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
 
 import java.util.List;
 

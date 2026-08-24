@@ -1,6 +1,6 @@
 package com.ideao.dev.javadatabase.supplier;
 
-import com.ideao.dev.javadatabase.supplier.dto.SupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dtos.SupplierDTO;
 
 import java.util.List;
 

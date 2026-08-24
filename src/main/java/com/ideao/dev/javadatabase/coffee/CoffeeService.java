@@ -1,10 +1,11 @@
 package com.ideao.dev.javadatabase.coffee;
 
+import com.ideao.dev.javadatabase.coffee.mappers.CoffeeMapper;
 import com.ideao.dev.javadatabase.common.database.DAOFactory;
 import com.ideao.dev.javadatabase.common.repository.GenericRepository;
-import com.ideao.dev.javadatabase.coffee.dto.AddCoffeeDTO;
-import com.ideao.dev.javadatabase.coffee.dto.CoffeeDTO;
-import com.ideao.dev.javadatabase.coffee.dto.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
 import com.ideao.dev.javadatabase.supplier.Supplier;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class CoffeeService {
         List<Coffee> coffees = coffeeRepository.viewList();
         List<CoffeeDTO> coffeeDTOS = new ArrayList<>();
         for (Coffee c : coffees) {
-           coffeeDTOS.add(new CoffeeDTO(c));
+           coffeeDTOS.add(CoffeeMapper.toDTO(c));
         }
         return coffeeDTOS;
     }
@@ -49,7 +50,7 @@ public class CoffeeService {
         Coffee coffee = coffeeRepository.read(id);
         CoffeeDTO coffeeDTO = null;
         if(coffee != null) {
-            coffeeDTO = new CoffeeDTO(coffee);
+            coffeeDTO = CoffeeMapper.toDTO(coffee);
         }
         return coffeeDTO;
     }

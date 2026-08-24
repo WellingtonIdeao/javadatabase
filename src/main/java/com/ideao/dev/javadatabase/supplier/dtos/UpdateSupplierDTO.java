@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.supplier.dto;
+package com.ideao.dev.javadatabase.supplier.dtos;
 
 public class UpdateSupplierDTO {
     private Long id;
