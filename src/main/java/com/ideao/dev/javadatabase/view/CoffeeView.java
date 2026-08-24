@@ -1,13 +1,13 @@
 package com.ideao.dev.javadatabase.view;
 
-import com.ideao.dev.javadatabase.model.entity.Coffee;
+import com.ideao.dev.javadatabase.model.dto.CoffeeDTO;
 
 import java.util.List;
 
 public class CoffeeView {
 
-    public void viewJson(List<Coffee> coffees) {
-        for (Coffee coffee: coffees) {
+    public void viewJson(List<CoffeeDTO> coffeeDTOs) {
+        for (CoffeeDTO coffee: coffeeDTOs) {
             System.out.println("{");
             System.out.println("\t\"name\": " + coffee.getName());
             System.out.println("\t\"sup id\": " + coffee.getSupId());
@@ -18,9 +18,9 @@ public class CoffeeView {
         }
     }
 
-    public void viewDetails(Coffee coffee) {
-        if (coffee != null) {
-            System.out.println(coffee);
+    public void viewDetails(CoffeeDTO coffeeDTO) {
+        if (coffeeDTO != null) {
+            System.out.println(coffeeDTO);
         } else {
             System.out.println("Coffee not found");
         }

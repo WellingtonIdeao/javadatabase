@@ -1,7 +1,7 @@
 package com.ideao.dev.javadatabase.model.entity;
 
 public class Supplier {
-    private long id;
+    private Long id;
     private String name;
     private String street;
     private String city;
@@ -11,7 +11,8 @@ public class Supplier {
 
     public Supplier() {}
 
-    public Supplier(String name, String street, String city, String state, String zip) {
+    public Supplier(Long id, String name, String street, String city, String state, String zip) {
+        this.id = id;
         this.name = name;
         this.street = street;
         this.city = city;

@@ -1,5 +1,6 @@
 package com.ideao.dev.javadatabase.controller;
 
+import com.ideao.dev.javadatabase.model.dto.*;
 import com.ideao.dev.javadatabase.model.entity.Coffee;
 import com.ideao.dev.javadatabase.model.service.CoffeeService;
 import com.ideao.dev.javadatabase.view.CoffeeView;
@@ -15,31 +16,25 @@ public class CoffeeController {
         this.coffeeView = new CoffeeView();
     }
     public void viewList() {
-        List<Coffee> coffees = coffeeService.viewList();
+        List<CoffeeDTO> coffeesDTOs = coffeeService.viewList();
 
-        coffeeView.viewJson(coffees);
+        coffeeView.viewJson(coffeesDTOs);
     }
 
-    public void add() {
-       Coffee coffee = new Coffee("Novo café", 5, 14.99, 0, 0);
-       coffeeService.add(coffee);
-    }
-
-    public void view() {
-        String id = "Novo café";
-        Coffee coffee = coffeeService.read(id);
+    public void view(String id) {
+        CoffeeDTO coffee = coffeeService.read(id);
         coffeeView.viewDetails(coffee);
     }
 
-    public void delete() {
-        String id = "Novo café";
+    public void add(AddCoffeeDTO coffeeDTO) {
+       coffeeService.add(coffeeDTO);
+    }
+
+    public void update(UpdateCoffeeDTO coffeeDTO) {
+        coffeeService.update(coffeeDTO);
+    }
+
+    public void delete(String id) {
         coffeeService.delete(id);
     }
-
-    public void update() {
-       Coffee coffee = new Coffee("Novo café", 5, 15.99, 1, 0) ;
-       coffeeService.update(coffee);
-    }
-
-
 }

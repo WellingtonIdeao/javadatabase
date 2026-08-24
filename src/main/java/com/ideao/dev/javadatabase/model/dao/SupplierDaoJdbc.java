@@ -18,15 +18,14 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
 
-                int id = rs.getInt("id");
+                long id = rs.getInt("id");
                 String name = rs.getString("name");
                 String street = rs.getString("street");
                 String city = rs.getString("city");
                 String state = rs.getString("state");
                 String zip = rs.getString("zip");
 
-                Supplier supplier = new Supplier(name, street, city, state, zip);
-                supplier.setId(id);
+                Supplier supplier = new Supplier(id, name, street, city, state, zip);
                 suppliers.add(supplier);
             }
         } catch (SQLException e) {

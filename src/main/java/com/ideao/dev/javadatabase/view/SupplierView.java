@@ -1,33 +1,27 @@
 package com.ideao.dev.javadatabase.view;
 
-import com.ideao.dev.javadatabase.model.entity.Supplier;
+import com.ideao.dev.javadatabase.model.dto.SupplierDTO;
 
 import java.util.List;
 
 public class SupplierView {
 
-    public void viewList(String out) {
-        System.out.println(out);
-    }
-
-    public void viewJson(List<Supplier> suppliers) {
-        if (!suppliers.isEmpty()) {
-            for (Supplier sup : suppliers) {
-                System.out.println("{");
-                System.out.println("\t\"id\": " + sup.getId());
-                System.out.println("\t\"name\": \"" + sup.getName() + "\"");
-                System.out.println("\t\"street\": \"" + sup.getStreet() + "\"");
-                System.out.println("\t\"city\": \"" + sup.getCity() + "\"");
-                System.out.println("\t\"city\": \"" + sup.getState() + "\"");
-                System.out.println("\t\"zip\": \"" + sup.getZip() + "\"");
-                System.out.println("}");
-            }
+    public void viewJson(List<SupplierDTO> suppliersDTOs) {
+        for (SupplierDTO sup : suppliersDTOs) {
+            System.out.println("{");
+            System.out.println("\t\"id\": " + sup.getId());
+            System.out.println("\t\"name\": \"" + sup.getName() + "\"");
+            System.out.println("\t\"street\": \"" + sup.getStreet() + "\"");
+            System.out.println("\t\"city\": \"" + sup.getCity() + "\"");
+            System.out.println("\t\"state\": \"" + sup.getState() + "\"");
+            System.out.println("\t\"zip\": \"" + sup.getZip() + "\"");
+            System.out.println("}");
         }
     }
 
-    public void viewDetail(Supplier supplier) {
-        if (supplier != null) {
-            System.out.println(supplier);
+    public void viewDetail(SupplierDTO supplierDTO) {
+        if (supplierDTO != null) {
+            System.out.println(supplierDTO);
         } else {
             System.out.println("Supplier não encontrado! Tente com outro id.");
         }

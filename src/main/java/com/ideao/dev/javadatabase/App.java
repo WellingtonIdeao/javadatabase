@@ -2,7 +2,10 @@ package com.ideao.dev.javadatabase;
 
 import com.ideao.dev.javadatabase.controller.CoffeeController;
 import com.ideao.dev.javadatabase.controller.SupplierController;
-import com.ideao.dev.javadatabase.model.entity.Supplier;
+import com.ideao.dev.javadatabase.model.dto.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.model.dto.AddSupplierDTO;
+import com.ideao.dev.javadatabase.model.dto.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.model.dto.UpdateSupplierDTO;
 
 
 public class App {
@@ -10,16 +13,29 @@ public class App {
 		SupplierController supController = new SupplierController();
         CoffeeController coffeeController = new CoffeeController();
 
-//        supController.add(new Supplier("Teste Ltda.","projetada", "joão pessoa", "PB", "58000" ));
-//        supController.view();
-        supController.viewList();
-//        supController.update();
-//        supController.delete();
+//        AddSupplierDTO newSupplier =
+//                new AddSupplierDTO("São Braz", "projetada", "joão pessoa", "PB", "58000");
+//        supController.add(newSupplier);
+//         supController.view(5L);
+//        supController.viewList();
+//
+//        UpdateSupplierDTO updateSupplier =
+//                new UpdateSupplierDTO(
+//                        5L, "Santa Clara","rua 1",
+//                        "nomeada", "BR", "70000"
+//                );
+//        supController.update(updateSupplier);
+//        supController.delete(5L);
 
-//        coffeeController.add();
-        coffeeController.viewList();
-//        coffeeController.view();
-//        coffeeController.update();
-//        coffeeController.delete();
+//        AddCoffeeDTO newCoffee = new AddCoffeeDTO("Família", 8L, 13.99, 0, 0);
+//        coffeeController.add(newCoffee);
+//
+
+//        coffeeController.view("Família");
+//        coffeeController.viewList();
+//        UpdateCoffeeDTO updateCoffee = new UpdateCoffeeDTO("Família", 8L, 19.99, 0, 0 );
+//        coffeeController.update(updateCoffee);
+//        coffeeController.view("Família");
+//        coffeeController.delete("Família");
     }
 }

@@ -1,6 +1,8 @@
 package com.ideao.dev.javadatabase.controller;
 
-import com.ideao.dev.javadatabase.model.entity.Supplier;
+import com.ideao.dev.javadatabase.model.dto.AddSupplierDTO;
+import com.ideao.dev.javadatabase.model.dto.SupplierDTO;
+import com.ideao.dev.javadatabase.model.dto.UpdateSupplierDTO;
 import com.ideao.dev.javadatabase.model.service.SupplierService;
 import com.ideao.dev.javadatabase.view.SupplierView;
 
@@ -16,35 +18,25 @@ public class SupplierController {
     }
 
     public void viewList() {
-        List<Supplier> suppliers = supplierService.viewList();
+        List<SupplierDTO> supplierDTOS = supplierService.viewList();
 
-        supplierView.viewJson(suppliers);
+        supplierView.viewJson(supplierDTOS);
     }
 
-    public void add(Supplier supplier) {
-        supplierService.add(supplier);
+    public void view(Long id) {
+        SupplierDTO supplierDTO = supplierService.read(id);
+        supplierView.viewDetail(supplierDTO);
     }
 
-    public void view() {
-        Long id = 5L;
-        Supplier supplier = supplierService.read(id);
-        supplierView.viewDetail(supplier);
+    public void add(AddSupplierDTO supplierDTO) {
+        supplierService.add(supplierDTO);
     }
 
-    public void update() {
-        Long id = 5L;
-        Supplier supplier = supplierService.read(id);
-        if (supplier != null) {
-            supplier.setName("Modificado Ltda.");
-            supplierService.update(supplier);
-        } else {
-            System.out.println("Supplier invalid.");
-        }
+    public void update(UpdateSupplierDTO updateSupplierDTO) {
+        supplierService.update(updateSupplierDTO);
     }
 
-    public void delete() {
-        Long id = 5L;
+    public void delete(Long id) {
         supplierService.delete(id);
     }
-
 }
