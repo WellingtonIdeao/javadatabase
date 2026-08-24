@@ -1,5 +1,7 @@
 package com.ideao.dev.javadatabase.supplier.dto;
 
+import com.ideao.dev.javadatabase.supplier.Supplier;
+
 public class SupplierDTO {
     private Long id;
     private String name;
@@ -15,6 +17,15 @@ public class SupplierDTO {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+
+    public SupplierDTO(Supplier supplier) {
+        this.id = supplier.getId();
+        this.name = supplier.getName();
+        this.street = supplier.getStreet();
+        this.city = supplier.getCity();
+        this.state = supplier.getState();
+        this.zip = supplier.getZip();
     }
 
     public Long getId() {

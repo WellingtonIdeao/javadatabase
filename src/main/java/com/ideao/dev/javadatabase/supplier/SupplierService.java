@@ -20,10 +20,7 @@ public class SupplierService {
         List<Supplier> suppliers = repository.viewList();
         List<SupplierDTO> supplierDTOs = new ArrayList<>();
         for (Supplier s: suppliers) {
-            supplierDTOs.add(
-                    new SupplierDTO(
-                            s.getId(), s.getName(), s.getStreet(), s.getCity(), s.getState(), s.getZip())
-            );
+            supplierDTOs.add(new SupplierDTO(s));
         }
         return supplierDTOs;
     }
@@ -38,15 +35,11 @@ public class SupplierService {
     }
 
     public SupplierDTO read(Long id) {
-        Supplier sup = repository.read(id);
+        Supplier supplier = repository.read(id);
         SupplierDTO supplierDTO = null;
 
-        if(sup != null) {
-            supplierDTO =
-                    new SupplierDTO(
-                            sup.getId(), sup.getName(),sup.getStreet(),
-                            sup.getCity(), sup.getState(), sup.getZip()
-                    );
+        if(supplier != null) {
+            supplierDTO = new SupplierDTO(supplier);
         }
         return supplierDTO;
     }

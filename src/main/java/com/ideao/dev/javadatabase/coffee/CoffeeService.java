@@ -24,7 +24,7 @@ public class CoffeeService {
         List<Coffee> coffees = coffeeRepository.viewList();
         List<CoffeeDTO> coffeeDTOS = new ArrayList<>();
         for (Coffee c : coffees) {
-           coffeeDTOS.add(new CoffeeDTO(c.getName(), c.getSupId(), c.getPrice(), c.getSales(), c.getTotal()));
+           coffeeDTOS.add(new CoffeeDTO(c));
         }
         return coffeeDTOS;
     }
@@ -49,11 +49,7 @@ public class CoffeeService {
         Coffee coffee = coffeeRepository.read(id);
         CoffeeDTO coffeeDTO = null;
         if(coffee != null) {
-            coffeeDTO =
-                    new CoffeeDTO(
-                            coffee.getName(), coffee.getSupId(), coffee.getPrice(),
-                            coffee.getSales(), coffee.getTotal()
-                    );
+            coffeeDTO = new CoffeeDTO(coffee);
         }
         return coffeeDTO;
     }

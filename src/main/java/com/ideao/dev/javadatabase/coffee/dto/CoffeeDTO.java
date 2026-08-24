@@ -1,5 +1,7 @@
 package com.ideao.dev.javadatabase.coffee.dto;
 
+import com.ideao.dev.javadatabase.coffee.Coffee;
+
 public class CoffeeDTO {
     private String name;
     private long supId;
@@ -13,6 +15,14 @@ public class CoffeeDTO {
         this.price = price;
         this.sales = sales;
         this.total = total;
+    }
+
+    public CoffeeDTO(Coffee coffee) {
+        this.name = coffee.getName();
+        this.supId = coffee.getSupId();
+        this.price = coffee.getPrice();
+        this.sales = coffee.getSales();
+        this.total = coffee.getTotal();
     }
 
     public String getName() {
