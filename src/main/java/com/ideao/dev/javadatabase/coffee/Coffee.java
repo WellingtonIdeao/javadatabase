@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.model.entity;
+package com.ideao.dev.javadatabase.coffee;
 
 public class Coffee {
    private String name;

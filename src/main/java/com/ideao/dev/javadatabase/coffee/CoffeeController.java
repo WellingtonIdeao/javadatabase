@@ -1,9 +1,8 @@
-package com.ideao.dev.javadatabase.controller;
+package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.model.dto.*;
-import com.ideao.dev.javadatabase.model.entity.Coffee;
-import com.ideao.dev.javadatabase.model.service.CoffeeService;
-import com.ideao.dev.javadatabase.view.CoffeeView;
+import com.ideao.dev.javadatabase.coffee.dto.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dto.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dto.UpdateCoffeeDTO;
 
 import java.util.List;
 

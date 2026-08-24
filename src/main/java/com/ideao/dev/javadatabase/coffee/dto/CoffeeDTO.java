@@ -1,13 +1,13 @@
-package com.ideao.dev.javadatabase.model.dto;
+package com.ideao.dev.javadatabase.coffee.dto;
 
-public class AddCoffeeDTO {
+public class CoffeeDTO {
     private String name;
-    private Long supId;
+    private long supId;
     private double price;
     private int sales;
     private int total;
 
-    public AddCoffeeDTO(String name, Long supId, double price, int sales, int total) {
+    public CoffeeDTO(String name, long supId, double price, int sales, int total) {
         this.name = name;
         this.supId = supId;
         this.price = price;
@@ -19,7 +19,7 @@ public class AddCoffeeDTO {
         return name;
     }
 
-    public Long getSupId() {
+    public long getSupId() {
         return supId;
     }
 
@@ -33,5 +33,16 @@ public class AddCoffeeDTO {
 
     public int getTotal() {
         return total;
+    }
+
+    @Override
+    public String toString() {
+        return "Coffee{" +
+                "name='" + name + '\'' +
+                ", supId=" + supId +
+                ", price=" + price +
+                ", sales=" + sales +
+                ", total=" + total +
+                '}';
     }
 }

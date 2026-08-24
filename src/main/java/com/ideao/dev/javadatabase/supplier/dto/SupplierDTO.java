@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.model.dto;
+package com.ideao.dev.javadatabase.supplier.dto;
 
 public class SupplierDTO {
     private Long id;

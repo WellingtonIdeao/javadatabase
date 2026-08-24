@@ -1,11 +1,7 @@
 package com.ideao.dev.javadatabase;
 
-import com.ideao.dev.javadatabase.controller.CoffeeController;
-import com.ideao.dev.javadatabase.controller.SupplierController;
-import com.ideao.dev.javadatabase.model.dto.AddCoffeeDTO;
-import com.ideao.dev.javadatabase.model.dto.AddSupplierDTO;
-import com.ideao.dev.javadatabase.model.dto.UpdateCoffeeDTO;
-import com.ideao.dev.javadatabase.model.dto.UpdateSupplierDTO;
+import com.ideao.dev.javadatabase.coffee.CoffeeController;
+import com.ideao.dev.javadatabase.supplier.SupplierController;
 
 
 public class App {

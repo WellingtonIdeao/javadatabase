@@ -1,12 +1,11 @@
-package com.ideao.dev.javadatabase.model.service;
+package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.model.dao.DAOFactory;
-import com.ideao.dev.javadatabase.model.dao.GenericRepository;
-import com.ideao.dev.javadatabase.model.dto.AddCoffeeDTO;
-import com.ideao.dev.javadatabase.model.dto.CoffeeDTO;
-import com.ideao.dev.javadatabase.model.dto.UpdateCoffeeDTO;
-import com.ideao.dev.javadatabase.model.entity.Coffee;
-import com.ideao.dev.javadatabase.model.entity.Supplier;
+import com.ideao.dev.javadatabase.common.database.DAOFactory;
+import com.ideao.dev.javadatabase.common.repository.GenericRepository;
+import com.ideao.dev.javadatabase.coffee.dto.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dto.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dto.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.supplier.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;

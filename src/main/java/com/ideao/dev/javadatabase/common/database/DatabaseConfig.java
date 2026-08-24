@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.config;
+package com.ideao.dev.javadatabase.common.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

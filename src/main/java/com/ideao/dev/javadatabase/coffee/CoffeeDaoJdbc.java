@@ -1,7 +1,7 @@
-package com.ideao.dev.javadatabase.model.dao;
+package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.config.DatabaseConfig;
-import com.ideao.dev.javadatabase.model.entity.Coffee;
+import com.ideao.dev.javadatabase.common.database.DatabaseConfig;
+import com.ideao.dev.javadatabase.common.repository.GenericRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,8 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
                 "FROM coffee c INNER JOIN supplier s ON c.sup_id = s.id WHERE c.is_active AND s.is_active";
 
         List<Coffee> coffees = new ArrayList<>();
-        try (PreparedStatement pstmt = DatabaseConfig.getConnection().prepareStatement(sql);
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 String name = rs.getString("name");

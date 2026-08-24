@@ -1,7 +1,7 @@
-package com.ideao.dev.javadatabase.model.dao;
+package com.ideao.dev.javadatabase.supplier;
 
-import com.ideao.dev.javadatabase.model.entity.Supplier;
-import com.ideao.dev.javadatabase.config.DatabaseConfig;
+import com.ideao.dev.javadatabase.common.repository.GenericRepository;
+import com.ideao.dev.javadatabase.common.database.DatabaseConfig;
 
 import java.sql.*;
 import java.util.ArrayList;

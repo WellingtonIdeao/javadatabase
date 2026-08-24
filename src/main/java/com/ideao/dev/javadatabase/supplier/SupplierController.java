@@ -1,10 +1,8 @@
-package com.ideao.dev.javadatabase.controller;
+package com.ideao.dev.javadatabase.supplier;
 
-import com.ideao.dev.javadatabase.model.dto.AddSupplierDTO;
-import com.ideao.dev.javadatabase.model.dto.SupplierDTO;
-import com.ideao.dev.javadatabase.model.dto.UpdateSupplierDTO;
-import com.ideao.dev.javadatabase.model.service.SupplierService;
-import com.ideao.dev.javadatabase.view.SupplierView;
+import com.ideao.dev.javadatabase.supplier.dto.AddSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dto.SupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dto.UpdateSupplierDTO;
 
 import java.util.List;
 

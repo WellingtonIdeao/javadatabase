@@ -1,4 +1,4 @@
-package com.ideao.dev.javadatabase.model.dao;
+package com.ideao.dev.javadatabase.common.repository;
 
 import java.util.List;
 

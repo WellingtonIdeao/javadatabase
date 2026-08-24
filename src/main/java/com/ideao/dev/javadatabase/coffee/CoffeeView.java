@@ -1,6 +1,6 @@
-package com.ideao.dev.javadatabase.view;
+package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.model.dto.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dto.CoffeeDTO;
 
 import java.util.List;
 

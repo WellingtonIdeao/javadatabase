@@ -1,11 +1,10 @@
-package com.ideao.dev.javadatabase.model.service;
+package com.ideao.dev.javadatabase.supplier;
 
-import com.ideao.dev.javadatabase.model.dao.GenericRepository;
-import com.ideao.dev.javadatabase.model.dto.AddSupplierDTO;
-import com.ideao.dev.javadatabase.model.dto.SupplierDTO;
-import com.ideao.dev.javadatabase.model.dto.UpdateSupplierDTO;
-import com.ideao.dev.javadatabase.model.entity.Supplier;
-import com.ideao.dev.javadatabase.model.dao.DAOFactory;
+import com.ideao.dev.javadatabase.common.repository.GenericRepository;
+import com.ideao.dev.javadatabase.supplier.dto.AddSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dto.SupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dto.UpdateSupplierDTO;
+import com.ideao.dev.javadatabase.common.database.DAOFactory;
 
 import java.util.ArrayList;
 import java.util.List;
