@@ -51,11 +51,14 @@ public class SupplierService {
                         supplierDTO.getId(), supplierDTO.getName(), supplierDTO.getStreet(),
                         supplierDTO.getCity(), supplierDTO.getState(), supplierDTO.getZip()
                 );
-       if (repository.existsById(supplier.getId())) {
+        if (supplierDTO.getId() == null ) {
+            System.out.println("Supplier is invalid");
+        }
+        if (repository.existsById(supplier.getId())) {
             repository.update(supplier);
-       } else {
+        } else {
            System.out.println("Supplier not found.");
-       }
+        }
     }
 
     public void delete(Long id) {

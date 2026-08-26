@@ -1,14 +1,18 @@
 package com.ideao.dev.javadatabase;
 
 import com.ideao.dev.javadatabase.coffee.CoffeeController;
+import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
 import com.ideao.dev.javadatabase.supplier.SupplierController;
+import com.ideao.dev.javadatabase.supplier.dtos.AddSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
 
 
 public class App {
 	public static void main(String[] args) {
 		SupplierController supController = new SupplierController();
         CoffeeController coffeeController = new CoffeeController();
-
+//
 //        AddSupplierDTO newSupplier =
 //                new AddSupplierDTO("São Braz", "projetada", "joão pessoa", "PB", "58000");
 //        supController.add(newSupplier);
@@ -22,11 +26,11 @@ public class App {
 //                );
 //        supController.update(updateSupplier);
 //        supController.delete(5L);
-
-//        AddCoffeeDTO newCoffee = new AddCoffeeDTO("Família", 8L, 13.99, 0, 0);
+//
+//        AddCoffeeDTO newCoffee = new AddCoffeeDTO("Família", 0L, 13.99, 0, 0);
 //        coffeeController.add(newCoffee);
 //
-
+//
 //        coffeeController.view("Família");
 //        coffeeController.viewList();
 //        UpdateCoffeeDTO updateCoffee = new UpdateCoffeeDTO("Família", 8L, 19.99, 0, 0 );

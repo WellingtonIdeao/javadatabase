@@ -31,7 +31,11 @@ public class SupplierController {
     }
 
     public void update(UpdateSupplierDTO updateSupplierDTO) {
-        supplierService.update(updateSupplierDTO);
+        if ( updateSupplierDTO.getId() == null) {
+            System.out.println("Supplier invalid.");
+        } else {
+            supplierService.update(updateSupplierDTO);
+        }
     }
 
     public void delete(Long id) {

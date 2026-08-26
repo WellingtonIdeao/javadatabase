@@ -26,11 +26,19 @@ public class CoffeeController {
     }
 
     public void add(AddCoffeeDTO coffeeDTO) {
-       coffeeService.add(coffeeDTO);
+        if( coffeeDTO.getSupId() == 0) {
+            System.out.println("Coffee is invalid.");
+        } else {
+            coffeeService.add(coffeeDTO);
+        }
     }
 
     public void update(UpdateCoffeeDTO coffeeDTO) {
-        coffeeService.update(coffeeDTO);
+        if (coffeeDTO.getName() == null || coffeeDTO.getName().isEmpty()) {
+            System.out.println("Coffee is invalid.");
+        } else {
+            coffeeService.update(coffeeDTO);
+        }
     }
 
     public void delete(String id) {

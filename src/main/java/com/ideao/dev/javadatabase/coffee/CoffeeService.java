@@ -67,13 +67,17 @@ public class CoffeeService {
                         coffeeDTO.getName(), coffeeDTO.getSupId(), coffeeDTO.getPrice(),
                         coffeeDTO.getSales(), coffeeDTO.getTotal()
                 );
-       boolean existsCoffee =  coffeeRepository.existsById(coffee.getName());
-       boolean existsSupplier = supplierRepository.existsById(coffee.getSupId());
+        if ((coffee.getName() == null) || (coffee.getName().isEmpty()) || (coffee.getSupId() == 0))  {
+            System.out.println("Coffee invalid");
+        } else {
+            boolean existsCoffee =  coffeeRepository.existsById(coffee.getName());
+            boolean existsSupplier = supplierRepository.existsById(coffee.getSupId());
 
-       if (existsCoffee && existsSupplier) {
-           coffeeRepository.update(coffee);
-       } else {
-           System.out.println("Coffee invalid.");
-       }
+            if (existsCoffee && existsSupplier) {
+                coffeeRepository.update(coffee);
+            } else {
+                System.out.println("Coffee invalid.");
+            }
+        }
     }
 }
