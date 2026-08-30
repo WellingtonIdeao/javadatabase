@@ -3,6 +3,7 @@ package com.ideao.dev.javadatabase;
 import com.ideao.dev.javadatabase.coffee.CoffeeController;
 import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
 import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.common.handler.GlobalExceptionHandler;
 import com.ideao.dev.javadatabase.supplier.SupplierController;
 import com.ideao.dev.javadatabase.supplier.dtos.AddSupplierDTO;
 import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
@@ -10,8 +11,10 @@ import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
 
 public class App {
 	public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler(new GlobalExceptionHandler());
 		SupplierController supController = new SupplierController();
         CoffeeController coffeeController = new CoffeeController();
+
 //
 //        AddSupplierDTO newSupplier =
 //                new AddSupplierDTO("São Braz", "projetada", "joão pessoa", "PB", "58000");
