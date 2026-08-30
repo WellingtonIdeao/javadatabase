@@ -29,7 +29,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
                 suppliers.add(supplier);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
         return suppliers;
     }
@@ -48,7 +48,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -67,7 +67,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -94,7 +94,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
            }
            return supplier;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -125,7 +125,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -143,7 +143,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
                }
            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
         return false;
     }

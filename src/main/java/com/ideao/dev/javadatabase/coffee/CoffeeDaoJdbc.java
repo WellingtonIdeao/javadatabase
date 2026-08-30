@@ -30,7 +30,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
                 coffees.add(new Coffee(name, supId, price, sales, total));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
         return coffees;
     }
@@ -48,7 +48,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -65,7 +65,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
            pstmt.setString(5, coffee.getName());
            pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -92,7 +92,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -105,7 +105,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
             pstmt.setString(2, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
     }
 
@@ -123,7 +123,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha crítica ao acessar o banco de dados", e);
         }
         return false;
     }

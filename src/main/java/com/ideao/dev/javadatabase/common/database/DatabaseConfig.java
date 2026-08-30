@@ -25,7 +25,7 @@ public class DatabaseConfig {
                 }
             }));
         } catch (Exception e) {
-            throw new RuntimeException("Falha crítica ao inicializar o banco de dados", e);
+            throw new RuntimeException("Falha crítica ao iniciar o pool HikariCP", e);
         }
     }
 
