@@ -18,7 +18,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
                 "FROM coffee c INNER JOIN supplier s ON c.sup_id = s.id WHERE c.is_active AND s.is_active";
 
         List<Coffee> coffees = new ArrayList<>();
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
@@ -38,7 +38,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
     @Override
     public void create(Coffee coffee) {
         String sql = "INSERT INTO coffee (name, sup_id, price, sales, total) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, coffee.getName());
             pstmt.setLong(2, coffee.getSupId());
@@ -56,7 +56,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
     public void update(Coffee coffee) {
         String sql = "UPDATE coffee SET sup_id = ?, price = ?, sales = ?, total = ? WHERE name = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
            pstmt.setLong(1, coffee.getSupId());
            pstmt.setDouble(2, coffee.getPrice());
@@ -74,7 +74,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
         String sql = "SELECT * FROM coffee WHERE name = ? AND is_active";
         Coffee coffee = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement psmt = connection.prepareStatement(sql)) {
             psmt.setString(1, id);
             try (ResultSet rs = psmt.executeQuery()) {
@@ -99,7 +99,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
     @Override
     public void delete(String id) {
         String sql = "UPDATE coffee SET is_active = ? WHERE name = ?";
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setBoolean(1, false);
             pstmt.setString(2, id);
@@ -112,7 +112,7 @@ public class CoffeeDaoJdbc implements GenericRepository<Coffee, String> {
     @Override
     public Boolean existsById(String id) {
         String sql = "SELECT COUNT(*) FROM coffee WHERE name = ?";
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, id);
 

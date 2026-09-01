@@ -13,7 +13,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
         String sql = "SELECT id, name, street, city, state, zip FROM supplier WHERE is_active = TRUE";
         List<Supplier> suppliers = new ArrayList<>();
 
-        try (Connection con = DatabaseConfig.getConnection();
+        try (Connection con = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
@@ -38,7 +38,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
     public void create(Supplier supplier) {
         String sql = "INSERT INTO supplier (name, street, city, state, zip) VALUES(?, ?, ?, ?, ?)";
 
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getName());
             pstmt.setString(2, supplier.getStreet());
@@ -55,7 +55,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
     @Override
     public void update(Supplier supplier) {
         String sql = "UPDATE supplier SET name = ?, street = ?, city = ?, state = ?, zip = ? WHERE id = ?";
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getName());
             pstmt.setString(2, supplier.getStreet());
@@ -76,7 +76,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
         String sql = "SELECT * FROM supplier WHERE id = ? AND is_active";
         Supplier supplier = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql) ) {
             pstmt.setLong(1, id);
 
@@ -103,7 +103,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
         String updateSql = "UPDATE supplier SET is_active = ? WHERE id = ?";
         String updateCoffeeSql = "UPDATE coffee SET is_active = ? WHERE sup_id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection()) {
+        try (Connection connection = DatabaseConfig.getInstance().getConnection()) {
             connection.setAutoCommit(false);
             try (PreparedStatement updateActive = connection.prepareStatement(updateSql);
                  PreparedStatement updateCoffee = connection.prepareStatement(updateCoffeeSql)) {
@@ -132,7 +132,7 @@ public class SupplierDaoJdbc implements GenericRepository<Supplier, Long> {
     @Override
     public Boolean existsById(Long id) {
         String sql = "SELECT COUNT(*) FROM supplier WHERE id = ? AND is_active";
-        try (Connection connection = DatabaseConfig.getConnection();
+        try (Connection connection = DatabaseConfig.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
            pstmt.setLong(1, id);
 
