@@ -13,7 +13,7 @@ import java.util.Map;
 public class JPASingleton {
     private static final JPASingleton INSTANCE = new JPASingleton();
     private EntityManagerFactory emf;
-    private HikariDataSource dataSource;
+    private HikariDataSource sharedDataSource;
 
     private JPASingleton() {
         init();
@@ -33,20 +33,13 @@ public class JPASingleton {
     private final void init() {
         try {
             HikariConfig config = new HikariConfig("/hikari.properties");
-            dataSource = new HikariDataSource(config);
+            sharedDataSource = new HikariDataSource(config);
 
-            Flyway flyway = Flyway.configure().dataSource(dataSource).locations("classpath:db/migration").load();
+            Flyway flyway = Flyway.configure().dataSource(sharedDataSource).locations("classpath:db/migration").load();
             flyway.migrate();
 
             Map<String, Object> propsJpa = new HashMap<>();
-            propsJpa.put("jakarta.persistence.dataSource", dataSource);
-            propsJpa.put("hibernate.connection.datasource", dataSource);
-            propsJpa.put("hibernate.hbm2ddl.auto", "validate");
-            propsJpa.put("hibernate.connection.provider_class",
-                    "org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl");
-
-            propsJpa.put("jakarta.persistence.jdbc.url", dataSource.getJdbcUrl());
-
+            propsJpa.put("jakarta.persistence.nonJtaDataSource", sharedDataSource);
 
             emf = Persistence.createEntityManagerFactory("com.ideao.dev.javadatabase.jpa", propsJpa);
             Runtime.getRuntime().addShutdownHook(new Thread(this::closeResources));
@@ -64,9 +57,9 @@ public class JPASingleton {
             emf.close();
         }
 
-        if (dataSource != null && !dataSource.isClosed()) {
+        if (sharedDataSource != null && !sharedDataSource.isClosed()) {
             System.out.println("[JPA] Fechando Pool de Conexões HikariCP...");
-            dataSource.close();
+            sharedDataSource.close();
         }
         System.out.println("[JPA] Recursos liberados com sucesso.");
     }

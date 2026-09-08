@@ -3,12 +3,14 @@ package com.ideao.dev.javadatabase;
 import com.ideao.dev.javadatabase.coffee.CoffeeController;
 import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
 import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.common.database.CloseableEntityManager;
 import com.ideao.dev.javadatabase.common.database.JPASingleton;
 import com.ideao.dev.javadatabase.common.handler.GlobalExceptionHandler;
 import com.ideao.dev.javadatabase.supplier.SupplierController;
 import com.ideao.dev.javadatabase.supplier.dtos.AddSupplierDTO;
 import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 
 import java.util.Properties;
 
@@ -19,14 +21,12 @@ public class App {
 //		SupplierController supController = new SupplierController();
 //        CoffeeController coffeeController = new CoffeeController();
 
-        try {
-
-           EntityManager em =  JPASingleton.getInstance().getEntityManager();
+        try (CloseableEntityManager cem = new CloseableEntityManager(JPASingleton.getInstance().getEntityManager())) {
+            EntityManager em = cem.getEntityManager();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-//
 //        AddSupplierDTO newSupplier =
 //                new AddSupplierDTO("São Braz", "projetada", "joão pessoa", "PB", "58000");
 //        supController.add(newSupplier);
