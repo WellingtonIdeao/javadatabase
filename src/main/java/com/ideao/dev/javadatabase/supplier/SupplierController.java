@@ -1,44 +1,57 @@
 package com.ideao.dev.javadatabase.supplier;
 
-import com.ideao.dev.javadatabase.supplier.dtos.AddSupplierDTO;
+import com.ideao.dev.javadatabase.common.exceptions.BusinessException;
+import com.ideao.dev.javadatabase.supplier.dtos.CreateSupplierDTO;
 import com.ideao.dev.javadatabase.supplier.dtos.SupplierDTO;
 import com.ideao.dev.javadatabase.supplier.dtos.UpdateSupplierDTO;
+import com.ideao.dev.javadatabase.supplier.exceptions.SupplierNotFoundException;
 
 import java.util.List;
 
 public class SupplierController {
-    private final SupplierService supplierService;
+    private final SupplierServiceJPA supplierService;
     private final SupplierView supplierView;
 
     public SupplierController() {
-       supplierService = new SupplierService();
+       supplierService = new SupplierServiceJPA();
        supplierView = new SupplierView();
     }
 
-    public void viewList() {
-        List<SupplierDTO> supplierDTOS = supplierService.viewList();
-
+    public void list() {
+        List<SupplierDTO> supplierDTOS = supplierService.list();
         supplierView.viewJson(supplierDTOS);
     }
 
     public void view(Long id) {
-        SupplierDTO supplierDTO = supplierService.read(id);
-        supplierView.viewDetail(supplierDTO);
+        try {
+            SupplierDTO supplierDTO = supplierService.findById(id);
+            supplierView.viewDetail(supplierDTO);
+        } catch(SupplierNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void add(AddSupplierDTO supplierDTO) {
-        supplierService.add(supplierDTO);
+    public void create(CreateSupplierDTO supplierDTO) {
+        try {
+            supplierService.create(supplierDTO);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void update(UpdateSupplierDTO updateSupplierDTO) {
-        if ( updateSupplierDTO.getId() == null) {
-            System.out.println("Supplier invalid.");
-        } else {
+        try {
             supplierService.update(updateSupplierDTO);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void delete(Long id) {
-        supplierService.delete(id);
+        try {
+            supplierService.delete(id);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

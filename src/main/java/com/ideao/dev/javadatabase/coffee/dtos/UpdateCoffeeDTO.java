@@ -1,18 +1,30 @@
 package com.ideao.dev.javadatabase.coffee.dtos;
 
+import java.math.BigDecimal;
+
 public class UpdateCoffeeDTO {
+    private Long id;
     private String name;
-    private long supId;
-    private double price;
+    private Long supplierId;
+    private BigDecimal price;
     private int sales;
     private int total;
 
-    public UpdateCoffeeDTO(String name, long supId, double price, int sales, int total) {
+    public UpdateCoffeeDTO(Long id, String name, Long supplierId, BigDecimal price, int sales, int total) {
+        this.id = id;
         this.name = name;
-        this.supId = supId;
+        this.supplierId = supplierId;
         this.price = price;
         this.sales = sales;
         this.total = total;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -23,19 +35,19 @@ public class UpdateCoffeeDTO {
         this.name = name;
     }
 
-    public long getSupId() {
-        return supId;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupId(long supId) {
-        this.supId = supId;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

@@ -1,35 +1,44 @@
 package com.ideao.dev.javadatabase.coffee;
 
-import com.ideao.dev.javadatabase.coffee.dtos.AddCoffeeDTO;
-import com.ideao.dev.javadatabase.coffee.dtos.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.CreateCoffeeDTO;
 import com.ideao.dev.javadatabase.coffee.dtos.UpdateCoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.dtos.CoffeeDTO;
+import com.ideao.dev.javadatabase.coffee.exceptions.CoffeeNotFoundException;
+import com.ideao.dev.javadatabase.common.exceptions.BusinessException;
 
 import java.util.List;
 
 public class CoffeeController {
-    private final CoffeeService coffeeService;
+    private final CoffeeServiceJPA coffeeService;
     private final CoffeeView coffeeView;
 
     public CoffeeController() {
-        this.coffeeService = new CoffeeService();
+        this.coffeeService = new CoffeeServiceJPA();
         this.coffeeView = new CoffeeView();
     }
-    public void viewList() {
-        List<CoffeeDTO> coffeesDTOs = coffeeService.viewList();
-
+    public void list() {
+        List<CoffeeDTO> coffeesDTOs = coffeeService.list();
         coffeeView.viewJson(coffeesDTOs);
     }
 
-    public void view(String id) {
-        CoffeeDTO coffee = coffeeService.read(id);
-        coffeeView.viewDetails(coffee);
+    public void view(Long id) {
+        try {
+            CoffeeDTO coffee = coffeeService.findById(id);
+            coffeeView.viewDetails(coffee);
+        } catch (CoffeeNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void add(AddCoffeeDTO coffeeDTO) {
-        if( coffeeDTO.getSupId() == 0) {
+    public void create(CreateCoffeeDTO coffeeDTO) {
+        if( coffeeDTO.getSupplierId() == null || coffeeDTO.getSupplierId() == 0L) {
             System.out.println("Coffee is invalid.");
         } else {
-            coffeeService.add(coffeeDTO);
+            try {
+                coffeeService.create(coffeeDTO);
+            } catch (BusinessException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -37,11 +46,19 @@ public class CoffeeController {
         if (coffeeDTO.getName() == null || coffeeDTO.getName().isEmpty()) {
             System.out.println("Coffee is invalid.");
         } else {
-            coffeeService.update(coffeeDTO);
+            try {
+                coffeeService.update(coffeeDTO);
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    public void delete(String id) {
-        coffeeService.delete(id);
+    public void delete(Long id) {
+        try {
+            coffeeService.delete(id);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

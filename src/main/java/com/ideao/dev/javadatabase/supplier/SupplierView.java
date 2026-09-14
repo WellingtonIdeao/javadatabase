@@ -20,10 +20,6 @@ public class SupplierView {
     }
 
     public void viewDetail(SupplierDTO supplierDTO) {
-        if (supplierDTO != null) {
             System.out.println(supplierDTO);
-        } else {
-            System.out.println("Supplier não encontrado! Tente com outro id.");
-        }
     }
 }

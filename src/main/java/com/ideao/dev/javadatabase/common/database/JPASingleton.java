@@ -13,6 +13,7 @@ import java.util.Map;
 public class JPASingleton {
     private static final JPASingleton INSTANCE = new JPASingleton();
     private EntityManagerFactory emf;
+    private final ThreadLocal<EntityManager> threadLocalEm = new ThreadLocal<>();
     private HikariDataSource sharedDataSource;
 
     private JPASingleton() {
@@ -27,7 +28,12 @@ public class JPASingleton {
         if (emf == null || !emf.isOpen()) {
             throw  new IllegalStateException("A EntityManagerFactory está fechada ou não foi inicializada.");
         }
-        return emf.createEntityManager();
+        EntityManager em = threadLocalEm.get();
+        if( em == null || !em.isOpen()) {
+            em = emf.createEntityManager();
+            threadLocalEm.set(em);
+        }
+        return em;
     }
 
     private final void init() {
@@ -62,5 +68,17 @@ public class JPASingleton {
             sharedDataSource.close();
         }
         System.out.println("[JPA] Recursos liberados com sucesso.");
+    }
+
+    public ThreadLocal<EntityManager> getThreadLocalEm() {
+        return threadLocalEm;
+    }
+
+    public void closeEntityManager() {
+        EntityManager em = threadLocalEm.get();
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+        threadLocalEm.remove();
     }
 }

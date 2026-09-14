@@ -9,8 +9,9 @@ public class CoffeeView {
     public void viewJson(List<CoffeeDTO> coffeeDTOs) {
         for (CoffeeDTO coffee: coffeeDTOs) {
             System.out.println("{");
+            System.out.println("\t\"id:\": " + coffee.getId());
             System.out.println("\t\"name\": " + coffee.getName());
-            System.out.println("\t\"sup id\": " + coffee.getSupId());
+            System.out.println("\t\"sup id\": " + coffee.getSupplier().getId());
             System.out.println("\t\"price\": " + coffee.getPrice());
             System.out.println("\t\"sales\": " + coffee.getSales());
             System.out.println("\t\"total\": " + coffee.getTotal());

@@ -1,14 +1,16 @@
 package com.ideao.dev.javadatabase.supplier.dtos;
 
+import com.ideao.dev.javadatabase.supplier.Uf;
+
 public class SupplierDTO {
     private Long id;
     private String name;
     private String street;
     private String city;
-    private String state;
+    private Uf state;
     private String zip;
 
-    public SupplierDTO(Long id, String name, String street, String city, String state, String zip) {
+    public SupplierDTO(Long id, String name, String street, String city, Uf state, String zip) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -33,7 +35,7 @@ public class SupplierDTO {
         return city;
     }
 
-    public String getState() {
+    public Uf getState() {
         return state;
     }
 
