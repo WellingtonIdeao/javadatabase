@@ -40,7 +40,7 @@ public class CoffeeServiceJPA {
             Optional<Supplier> optSupplier = supplierRepository.findById(coffeeDTO.getSupplierId());
             Supplier supplier = optSupplier.orElseThrow(() -> new SupplierNotFoundException("Supplier not found."));
             Coffee coffee = CoffeeMapper.toEntity(coffeeDTO);
-            coffee.addSupplier(supplier);
+            coffee.setSupplier(supplier);
             coffee.setActive(true);
             coffeeRepository.create(coffee);
         });

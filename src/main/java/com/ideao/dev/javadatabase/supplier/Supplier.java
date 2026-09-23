@@ -110,18 +110,22 @@ public class Supplier {
         return coffees;
     }
 
-    public void setCoffee(Coffee coffee) {
-        coffees.add(coffee);
+    public void setCoffees(List<Coffee> coffees) {
+        this.coffees = coffees;
     }
 
     public void addCoffee(Coffee coffee) {
-        setCoffee(coffee);
-        coffee.setSupplier(this);
+        if (coffee != null) {
+            coffees.add(coffee);
+            coffee.setSupplier(this);
+        }
     }
 
     public void removerCoffee(Coffee coffee) {
-        coffees.remove(coffee);
-        coffee.setSupplier(null);
+        if (coffee != null) {
+            coffees.remove(coffee);
+            coffee.setSupplier(null);
+        }
     }
     @Override
     public String toString() {

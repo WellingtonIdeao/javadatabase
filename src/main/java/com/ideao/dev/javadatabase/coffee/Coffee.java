@@ -58,11 +58,6 @@ public class Coffee {
         this.supplier = supplier;
     }
 
-    public void addSupplier(Supplier supplier) {
-        setSupplier(supplier);
-        supplier.setCoffee(this);
-    }
-
     public Supplier getSupplier() {
         return supplier;
     }
