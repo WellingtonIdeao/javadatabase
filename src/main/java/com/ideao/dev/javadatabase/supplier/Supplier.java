@@ -115,7 +115,7 @@ public class Supplier {
     }
 
     public void addCoffee(Coffee coffee) {
-        coffees.add(coffee);
+        setCoffee(coffee);
         coffee.setSupplier(this);
     }
 
