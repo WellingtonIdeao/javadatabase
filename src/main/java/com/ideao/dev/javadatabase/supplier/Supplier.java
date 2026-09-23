@@ -111,17 +111,17 @@ public class Supplier {
     }
 
     public void setCoffee(Coffee coffee) {
-        addCoffee(coffee);
-        coffee.addSupplier(this);
+        coffees.add(coffee);
     }
 
     public void addCoffee(Coffee coffee) {
         coffees.add(coffee);
+        coffee.setSupplier(this);
     }
 
     public void removerCoffee(Coffee coffee) {
         coffees.remove(coffee);
-        coffee.addSupplier(null);
+        coffee.setSupplier(null);
     }
     @Override
     public String toString() {
