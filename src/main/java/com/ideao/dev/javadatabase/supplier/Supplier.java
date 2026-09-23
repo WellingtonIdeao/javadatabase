@@ -110,8 +110,9 @@ public class Supplier {
         return coffees;
     }
 
-    public void setCoffees(List<Coffee> coffees) {
-        this.coffees = coffees;
+    public void setCoffee(Coffee coffee) {
+        addCoffee(coffee);
+        coffee.addSupplier(this);
     }
 
     public void addCoffee(Coffee coffee) {
@@ -120,7 +121,7 @@ public class Supplier {
 
     public void removerCoffee(Coffee coffee) {
         coffees.remove(coffee);
-        coffee.setSupplier(null);
+        coffee.addSupplier(null);
     }
     @Override
     public String toString() {

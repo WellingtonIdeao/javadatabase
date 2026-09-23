@@ -55,6 +55,11 @@ public class Coffee {
     }
 
     public void setSupplier(Supplier supplier) {
+        addSupplier(supplier);
+        supplier.addCoffee(this);
+    }
+
+    public void addSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
